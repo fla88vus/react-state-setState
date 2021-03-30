@@ -10,12 +10,11 @@ const Users = () => {
 
   const [objs, setObjs] = useState({
     p: {
-      id: v4(),
-      name: "pippo",
-      address: []
+      idx: v4(),
+      name: "pippo"
     },
     q: {
-      id: v4(),
+      idx: v4(),
       name: "pluto"
     }
   });
@@ -25,23 +24,33 @@ const Users = () => {
   const editObjSpread = () => {
     // Removing
     const { name, ...rest } = newO;
-    console.log(rest);
+    // console.log(rest, 'rest');
     // setNewO(rest);
 
     // Update
     const updateObj = { ...rest, name: "pippo" };
-    console.log(updateObj);
-    setNewO(updateObj);
+    // console.log(updateObj, 'updateObj');
+    // setNewO(updateObj);
   };
   // editObjSpread();
 
-  const editObjState = () => {
+  const editObjState = objId => {
     const test = Object.keys(objs).map(prop => {
       return objs[prop];
     });
-    console.log(test);
+
+    const objModified = test.reduce((acc, u) => {
+      if (u.idx === objId) {
+        return { ...acc, p: { id: u.idx, name: "Minnie" } };
+      } else {
+        return { ...acc, u };
+      }
+    }, {});
+
+    setObjs(objModified);
   };
-  editObjState();
+
+  // editObjState();
 
   const addUser = () => {
     setUser([...user, { id: v4(), name: "Paperino" }]);
@@ -93,6 +102,8 @@ const Users = () => {
 
         <h3>Edit obj</h3>
         <div>{newO.name}</div>
+        <h3>Nested obj</h3>
+        <div>{objs.p.name}</div>
         <button onClick={addUser}>Aggiungi</button>
         <br />
         <br />
@@ -105,7 +116,10 @@ const Users = () => {
         <button onClick={addSurnames}>Aggiungi soprannomi</button>
         <br />
         <br />
-        <button onClick={editObjSpread}>EditObjSpread</button>
+        {/*<button onClick={editObjSpread}>EditObjSpread</button>*/}
+        <button onClick={() => editObjState(objs.p.idx)}>
+          modifica oggetto
+        </button>
       </div>
     </>
   );
