@@ -6,18 +6,29 @@ const Users = () => {
   const addUser = () => {
     setUser([...user, "Paperino"]);
   };
+
+  const modifyUser = () => {
+    const [Pluto, ...other] = user;
+    console.log("other", other);
+    setUser(["Minnie", ...other]);
+  };
+
+  
   return (
     <>
       <div>
-        {user.map(u => {
+        {user.map((u, index) => {
           return (
-            <ul>
+            <ul key={index}>
               <li>{u}</li>
             </ul>
           );
         })}
       </div>
       <button onClick={addUser}>Aggiungi</button>
+      <br />
+      <br />
+      <button onClick={modifyUser}>Modifica Pluto</button>
     </>
   );
 };
