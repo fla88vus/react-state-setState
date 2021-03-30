@@ -26,11 +26,12 @@ const Users = () => {
     // Removing
     const { name, ...rest } = newO;
     console.log(rest);
-    // setNewO(rest)
+    // setNewO(rest);
 
+    // Update
     const updateObj = { ...rest, name: "pippo" };
     console.log(updateObj);
-    // setNewO(updateObj)
+    setNewO(updateObj);
   };
   // editObjSpread();
 
@@ -89,6 +90,9 @@ const Users = () => {
             </ul>
           );
         })}
+
+        <h3>Edit obj</h3>
+        <div>{newO.name}</div>
         <button onClick={addUser}>Aggiungi</button>
         <br />
         <br />
@@ -96,7 +100,12 @@ const Users = () => {
         <br />
         <br />
         <button onClick={() => removeUser(user[1].id)}>Elimina Pippo</button>
+        <br />
+        <br />
         <button onClick={addSurnames}>Aggiungi soprannomi</button>
+        <br />
+        <br />
+        <button onClick={editObjSpread}>EditObjSpread</button>
       </div>
     </>
   );
